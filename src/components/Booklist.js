@@ -1,8 +1,10 @@
 import React from 'react'
 import BookCard from './BookCard'
 
+
 const Booklist = (props) => {
     return (
+
         <div className="book-list">
             {
                 props.books.map((book, i) => {
@@ -12,11 +14,13 @@ const Booklist = (props) => {
                         title={book.volumeInfo.title}
                         author={book.volumeInfo.authors}
                         published={book.volumeInfo.publishedDate}
+                        id={book.id}
                     />
                 })
             }
         </div>
     )
+
 }
 
 export default Booklist

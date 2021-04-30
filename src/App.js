@@ -6,17 +6,24 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import SingleBook from './components/SingleBook';
 
-export default function App() {
+const App = (props) => {
+  
   return (
     <Router>
       <Link to='/'><button>books</button></Link> 
-      <Link to='/auth'><button>sign in</button></Link> 
       <Switch>
         <Route path='/' exact>
           <Books/>
         </Route>
+        <Route path='/single/:id' exact >
+          <SingleBook /> 
+        </Route>
+        
       </Switch>
     </Router>
   )
 }
+
+export default App;

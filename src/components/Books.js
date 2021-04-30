@@ -3,6 +3,7 @@ import Booklist from './Booklist'
 import React, { Component } from 'react'
 import request from 'superagent'
 
+
 export default class Books extends Component {
   constructor(props){
     super(props);
@@ -29,7 +30,7 @@ export default class Books extends Component {
   }
 
   handleSort = (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     this.setState({ sort: e.target.value })
   }
 
