@@ -16,10 +16,8 @@ import { UserContext } from "./providers/UserProvider";
 
 
 const App = (props) => {
-  const user = useContext(UserContext);
-  // console.log("    ")
-  // console.log(user)
-  // console.log("    ")
+  var user = localStorage.getItem('user');
+
   return (
     <Router>
       <Link to='/'><button>books</button></Link> 

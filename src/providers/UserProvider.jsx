@@ -5,34 +5,45 @@ import { auth, generateUserDocument } from "../firebase";
 export const UserContext = createContext({ user: null });
 
 class UserProvider extends Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      user: null
-    }
-  }
-
+  state = {
+    user: null
+  };
+  
 
   
   
   componentDidMount = async () => {
     auth.onAuthStateChanged(async userAuth => {
       const user = await generateUserDocument(userAuth);
+      
       this.setState({ user });
+      
     });
-    
+
 
   };
 
   render() {
+    
     const { user } = this.state;
-    console.log({user})
-    return (
-      <UserContext.Provider value={user}>
+    // if(user == null){
+    //   return <p>gverdi itvirteba</p>
+    // }
+    // else{
+      if(user !== null){
+
+        localStorage.setItem('user', JSON.stringify(user));
+      }
+      else{
+        <p>nuliasd</p>
+      }
+
+      return (
+        <UserContext.Provider value={user}>
         {this.props.children}
-      </UserContext.Provider>
-    );
+        </UserContext.Provider>
+      )
+    // }
   }
 }
 

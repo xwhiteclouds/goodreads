@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 import { signInWithGoogle } from "../firebase";
 import { auth } from "../firebase";
+import { useForm } from "react-hook-form";
+
 
 
 const SignIn = () => {
@@ -14,6 +16,8 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
 
     const signInWithEmailAndPasswordHandler = (event,email, password) => {
         event.preventDefault();
@@ -40,7 +44,7 @@ const SignIn = () => {
       <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
       <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
         {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
-        <form className="">
+        <form className="" onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="userEmail" className="block">
             Email:
           </label>
@@ -52,7 +56,13 @@ const SignIn = () => {
             placeholder="Your Email"
             id="userEmail"
             onChange = {(event) => onChangeHandler(event)}
+            // {...register("exampleRequired", { required: true })}
+            // {...errors.exampleRequired && <span>This field is required</span>}
+
           />
+      
+
+          
           <label htmlFor="userPassword" className="block">
             Password:
           </label>

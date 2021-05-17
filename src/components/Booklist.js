@@ -9,6 +9,7 @@ const Booklist = (props) => {
         <div className="book-list">
             {
                 props.books.map((book, i) => {
+                    if(book.volumeInfo.imageLinks !== undefined){
                     return <BookCard 
                         key={i}
                         image={book.volumeInfo.imageLinks.thumbnail}
@@ -17,6 +18,7 @@ const Booklist = (props) => {
                         published={book.volumeInfo.publishedDate}
                         id={book.id}
                     />
+                    }
                 })
             }
         </div>

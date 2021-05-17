@@ -15,7 +15,7 @@ const ProfilePage = () => {
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
         <div
           style={{
-            background: `url(${photoURL || 'https://www.pngarts.com/files/5/User-Avatar-Transparent.png'})  no-repeat center center`,
+            background: `url(${photoURL || 'https://cdn.iconscout.com/icon/free/png-256/account-avatar-profile-human-man-user-30448.png'})  no-repeat center center`,
             backgroundSize: "cover",
             height: "200px",
             width: "200px"
