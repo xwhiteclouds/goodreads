@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Books from './components/Books'
+import Main from './components/Main'
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +14,7 @@ import Application from "./components/Application";
 import UserProvider from "./providers/UserProvider";
 import ProfilePage from "./components/ProfilePage";
 import { UserContext } from "./providers/UserProvider";
+import PageNotFound from './components/PageNotFound'
 
 
 const App = (props) => {
@@ -20,12 +22,16 @@ const App = (props) => {
 
   return (
     <Router>
-      <Link to='/'><button>books</button></Link> 
+      <Link to='/'><button>main</button></Link>
+      <Link to='/books'><button>books</button></Link> 
       {user ? <Link to='/auth'><button>profile</button></Link> 
       : <Link to='/auth'><button>sign in</button></Link>}
   
       <Switch>
         <Route path='/' exact>
+          <Main />
+        </Route>
+        <Route path='/books' exact>
           <Books/>
         </Route>
         <Route path='/single/:id' exact >
@@ -35,6 +41,9 @@ const App = (props) => {
           <UserProvider>
             <Application />
           </UserProvider>
+        </Route>
+        <Route>
+          <PageNotFound />
         </Route>
       </Switch>
     </Router>

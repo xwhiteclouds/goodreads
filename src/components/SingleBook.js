@@ -10,7 +10,8 @@ import {firebase,  firestore} from '../firebase'
 
 export default function SingleBook() {
   const [reviews, setReviews] = useState([]);
-
+  const [readBooks, setReadBooks] = useState([]);
+  console.log(readBooks)
   let { id } = useParams();
   const url = 'https://www.googleapis.com/books/v1/volumes/' + id
   const [book, setBook] = useState(null)
@@ -20,14 +21,24 @@ export default function SingleBook() {
         setBook(response.data)
       }) 
   }, [url])
+  console.log(book)
 
   useEffect(() => {
     getReviews();
+    getReadBooks();
   }, [])
 
   const getReviews = async () => {
     const data = await firestore.collection("reviews").get();
     setReviews(data.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    })))
+  }
+
+  const getReadBooks = async () => {
+    const data = await firestore.collection("reading").get();
+    setReadBooks(data.docs.map(doc => ({
       ...doc.data(),
       id: doc.id
     })))
@@ -46,10 +57,59 @@ export default function SingleBook() {
       getReviews()
     })
   }
+  
+  const wantToRead = async () => {
+    readBooks.map((readBook, index) => {    
+      {if(readBook.book === id && readBook.user === userObj.uid){
+        console.log(readBook.id)
+        firestore.collection("reading").doc(readBook.id).delete();
+      }}
+    })
+    const userId = userObj.uid;
+    const bookId = id;
+    const status = "want to read"
+    const bookName =  book.volumeInfo.title;
+    const thumb = book.volumeInfo.imageLinks.thumbnail
+    await firestore.collection("reading").add({
+      user: userId,
+      book: bookId,
+      status: status,
+      bookName: bookName,
+      thumb: thumb
+    }).then(() => {
+      alert("added to reading list");
+      window.location.reload();
+    })
+    
+  }
+
+  const read = async () => {
+    readBooks.map((readBook, index) => {      
+      {if(readBook.book === id && readBook.user === userObj.uid){
+        firestore.collection("reading").doc(readBook.id).delete();
+      }}
+    })
+    const userId = userObj.uid;
+    const bookId = id;
+    const status = "read"
+    console.log(book)
+    const bookName =  book.volumeInfo.title;
+    const thumb = book.volumeInfo.imageLinks.thumbnail
+    
+    await firestore.collection("reading").add({
+      user: userId,
+      book: bookId,
+      status: status,
+      bookName: bookName,
+      thumb: thumb
+    }).then(() => {
+      alert("added to read books");
+      window.location.reload();
+    })
+  }
 
   var user = localStorage.getItem('user');
   if(book){
-    console.log(userObj)
     var userObj = localStorage.getItem('user')
 
     if(user !== 'undefined'){
@@ -60,6 +120,8 @@ export default function SingleBook() {
           <h3>ID: {id}</h3>
           <img src={book.volumeInfo.imageLinks.thumbnail} />
           <h1>{book.volumeInfo.title}</h1>
+          <button onClick={() => wantToRead()}>want to read</button>
+          <button onClick={() => read()}>read</button>
           <p>author: {book.volumeInfo.authors}</p>
           <p>pages: {book.volumeInfo.pageCount}</p>
           <p>publshed date: {book.volumeInfo.publishedDate}</p>
