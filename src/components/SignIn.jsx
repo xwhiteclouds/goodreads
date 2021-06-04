@@ -8,96 +8,65 @@ import {
 import { signInWithGoogle } from "../firebase";
 import { auth } from "../firebase";
 import { useForm } from "react-hook-form";
+import Img from '../imgs/signIn.png'
 
 
 
 const SignIn = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
 
-    const signInWithEmailAndPasswordHandler = (event,email, password) => {
-        event.preventDefault();
-        auth.signInWithEmailAndPassword(email, password).catch(error => {
-        setError("Error signing in with password and email!");
-          console.error("Error signing in with password and email", error);
-        });
-      };
-      
-      const onChangeHandler = (event) => {
-          const {name, value} = event.currentTarget;
-        
-          if(name === 'userEmail') {
-              setEmail(value);
-          }
-          else if(name === 'userPassword'){
-            setPassword(value);
-          }
-      };
-   
+  const signInWithEmailAndPasswordHandler = (event,email, password) => {
+      event.preventDefault();
+      // auth.signInWithEmailAndPassword(email, password).catch(error => {
+        // console.error("Error signing in with password and email", error);
+      // });
+    };
 
   return (
     <div className="mt-8">
-      <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
-      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
-        {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
-        <form className="" onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="userEmail" className="block">
-            Email:
-          </label>
+      <div className="border">
+        <img src={Img} />
+        {/* {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>} */}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {errors.email && <p style={{color: 'red', width: '100%'}}>This field is required</p>}
           <input
-            type="email"
+          {...register("email", {required: true})}
+            type="text"
             className="my-1 p-1 w-full"
-            name="userEmail"
-            value = {email}
             placeholder="Your Email"
-            id="userEmail"
-            onChange = {(event) => onChangeHandler(event)}
+            id="text"
+           
             // {...register("exampleRequired", { required: true })}
             // {...errors.exampleRequired && <span>This field is required</span>}
 
           />
-      
-
+            {errors.password && <p style={{color: 'red', width: '100%'}}>This field is required</p>}
           
-          <label htmlFor="userPassword" className="block">
-            Password:
-          </label>
           <input
+          {...register("password", {required: true, maxLength: 10})}
             type="password"
             className="mt-1 mb-3 p-1 w-full"
-            name="userPassword"
-            value = {password}
             placeholder="Your Password"
             id="userPassword"
-            onChange = {(event) => onChangeHandler(event)}
+
+          
           />
-          <button className="bg-green-400 hover:bg-green-500 w-full py-2 text-white" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
+          <button className="bg-green-400 hover:bg-green-500 w-full py-2 text-white"  type = "submit">
             Sign in
           </button>
         </form>
-        <p className="text-center my-3">or</p>
-        <button
-          className="bg-red-500 hover:bg-red-600 w-full py-2 text-white"
+        <button className="google"
           onClick={() => {
             signInWithGoogle();
           }}
         >
-          Sign in with Google
+          <img style={{width: '30px', marginTop: '7px'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png"/>
         </button>
-        <p className="text-center my-3">
-          Don't have an account?{" "}
-          <Link to="signUp" className="text-blue-500 hover:text-blue-600">
-            Sign up here
-          </Link>{" "}
-          <br />{" "}
-          <Link to="passwordReset" className="text-blue-500 hover:text-blue-600">
+        <Link to="passwordReset" className="text-blue-500 hover:text-blue-600">
             Forgot Password?
-          </Link>
-        </p>
+          </Link> 
       </div>
     </div>
   );

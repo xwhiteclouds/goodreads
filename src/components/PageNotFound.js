@@ -3,9 +3,9 @@ import error from '../imgs/404.png'
 
 export default function PageNotFound() {
     return (
-        <div>
+        <div className="pnf">
             <h1>404</h1>
-            <img src={error}/>
+            <img src={error} />
         </div>
     )
 }

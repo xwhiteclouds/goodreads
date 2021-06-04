@@ -116,67 +116,78 @@ export default function SingleBook() {
       var userObj = JSON.parse(localStorage.getItem('user'))
 
       return (
-        <div>
-          <h3>ID: {id}</h3>
+        <div className="singleBook">
           <img src={book.volumeInfo.imageLinks.thumbnail} />
-          <h1>{book.volumeInfo.title}</h1>
-          <button onClick={() => wantToRead()}>want to read</button>
-          <button onClick={() => read()}>read</button>
-          <p>author: {book.volumeInfo.authors}</p>
-          <p>pages: {book.volumeInfo.pageCount}</p>
-          <p>publshed date: {book.volumeInfo.publishedDate}</p>
-          <p>avarage rating: {book.volumeInfo.averageRating}</p>
-          <p>{book.volumeInfo.description}</p>
-          
-          <textarea placeholder="review" id="add_review"/>
-          <button onClick={() => addReview()}>submit</button>
-          <br/>
-          <br />
-          
-          {
-          reviews.map((review, index) => {
-           
-              {if(review.book === id){
-                return(
-                <div class="post">
-                  <h3>{review.name}</h3>
-                  <p>{review.post}</p>
-                </div>
-                )
-              }}
-          })
-          }
+          <div className="desc">
+            <div className="text">
+              <p>avarage rating: {book.volumeInfo.averageRating}</p>
+              <h1>{book.volumeInfo.title}</h1>
+              <p className="description">{book.volumeInfo.description}</p>
+              <button onClick={() => wantToRead()}>want to read</button>
+              <button onClick={() => read()}>read</button>
+            </div>
+          </div>
+          <div className="details">
+            <h3>Details</h3>
+            <p>author: {book.volumeInfo.authors}</p>
+            <p>pages: {book.volumeInfo.pageCount}</p>
+            <p>publshed date: {book.volumeInfo.publishedDate}</p>
+          </div>
+          <div className="reviews">
+            <div className="postReview">
+            <textarea placeholder="review" id="add_review"/>
+              <button onClick={() => addReview()}>submit</button>
+            </div>
+            
+            {
+            reviews.map((review, index) => {
+            
+                {if(review.book === id){
+                  return(
+                  <div class="post">
+                    <h3>{review.name}</h3>
+                    <p>{review.post}</p>
+                  </div>
+                  )
+                }}
+            })
+            }
+          </div>
         </div>  
       )
     }
     else{
       return (
-        <div>
-          <h3>ID: {id}</h3>
+        <div className="singleBook">
           <img src={book.volumeInfo.imageLinks.thumbnail} />
-          <h1>{book.volumeInfo.title}</h1>
-          <p>author: {book.volumeInfo.authors}</p>
-          <p>pages: {book.volumeInfo.pageCount}</p>
-          <p>publshed date: {book.volumeInfo.publishedDate}</p>
-          <p>avarage rating: {book.volumeInfo.averageRating}</p>
-          <p>{book.volumeInfo.description}</p>
-          
-           <br/>
-          <br />
-          
-          {
-          reviews.map((review, index) => {
-           
-              {if(review.book === id){
-                return(
-                <div class="post">
-                  <h3>{review.name}</h3>
-                  <p>{review.post}</p>
-                </div>
-                )
-              }}
-          })
-          }
+          <div className="desc">
+            <div className="text">
+              <p>avarage rating: {book.volumeInfo.averageRating}</p>
+              <h1>{book.volumeInfo.title}</h1>
+              <p className="description">{book.volumeInfo.description}</p>
+            </div>
+          </div>
+          <div className="details">
+            <h3>Details</h3>
+            <p>author: {book.volumeInfo.authors}</p>
+            <p>pages: {book.volumeInfo.pageCount}</p>
+            <p>publshed date: {book.volumeInfo.publishedDate}</p>
+          </div>
+          <div className="reviews">
+            {
+            reviews.map((review, index) => {
+            
+                {if(review.book === id){
+                  return(
+                  <div class="post">
+                    <h3>{review.name}</h3>
+                    <p>{review.post}</p>
+                  </div>
+                  )
+                }}
+            })
+            }
+          </div>
         </div>  
       )
     }

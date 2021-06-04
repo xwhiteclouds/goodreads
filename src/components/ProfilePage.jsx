@@ -8,9 +8,37 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
-
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import {auth} from "../firebase";
+
+
+
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+
 const ProfilePage = () => {
   const user = useContext(UserContext);
   const [readBooks, setReadBooks] = useState([]);
@@ -19,7 +47,10 @@ const ProfilePage = () => {
   useEffect(() => {
     getReadBooks();
   }, [])
-
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const getReadBooks = async () => {
     const data = await firestore.collection("reading").where('user', '==', user.uid).get();
@@ -29,30 +60,28 @@ const ProfilePage = () => {
       id: doc.id
     })))
   }
-  
-  
-
-
 
   return (
-    <div className = "mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
-      <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
+    <div className = "mx-auto">
+      <div className="flex">
         <div className = "md:pl-4">
+          <img src={photoURL} />
         <h2 className = "text-2xl font-semibold">{displayName}</h2>
       </div>
       </div>
-      <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
-      <div className="reading-list">
-        <div className="read" style={{width: '50%', float: 'left'}}>
-        <h3>read</h3>
-          {
+      <button className="signOut" onClick = {() => {auth.signOut()}}>Sign out</button>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+          <Tab label="Read" />
+          <Tab label="Want to read" />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        {
             readBooks.map((readBook, index) => {
               {if(readBook.status === 'read'){
                 return(
-                  <div class="post" style={{width: '200px',
-                    background: 'lavender',
-                    border: 'solid purple',
-                    padding: '10px'}}>
+                  <div className="carousel-content">
                     <img src={readBook.thumb} alt="" />
                     <p>{readBook.bookName}</p>
                     <Link to={`single/${readBook.book}`}>
@@ -64,18 +93,14 @@ const ProfilePage = () => {
           })
             
           }
-        </div>
-        <div className="want-to-read" style={{width: '50%', float: 'left'}}>
-            <h2>want to read</h2>
-            {
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        {
             readBooks.map((readBook, index) => {
             
                 {if(readBook.status === 'want to read'){
                   return(
-                    <div class="post" style={{width: '200px',
-                    background: 'lavender',
-                    border: 'solid purple',
-                    padding: '10px'}}>
+                    <div class="carousel-content" >
                       <img src={readBook.thumb} alt="" />
                       <p>{readBook.bookName}</p>
                       <Link to={`single/${readBook.book}`}>
@@ -86,9 +111,8 @@ const ProfilePage = () => {
                 }}
             })
             }
-          
-        </div>
-      </div>
+      </TabPanel>
+
     </div>
   ) 
 };

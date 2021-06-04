@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Mate SC', serif;
+}
+
+.main{
+    width: 100%;
+    height: 100vh;
+    background-color: #9CB380;
+    padding-top: 26px;
+    padding-right: 26px;
+    position: relative;
+}
+nav{
+    float: left;
+    width: 215px;
+    height: 100%;
+}
+nav a button{
+    border: none;
+    width: 100%;
+    background: none;
+    color: #F2F5E0;
+    font-size: 30px;
+    padding: 15px;
+}
+nav a{
+    text-decoration: none;
+    cursor: pointer;
+}
+nav a:focus, input:focus, textarea:focus{
+    outline: none;
+}
+nav h1{
+    text-align: center;
+    margin: 20px;
+    font-size: 50px;
+    color: #F2F5E0;
+}
+.box h3{
+    margin-bottom: 20px;
+    color: #717744;
+    display: inline-block;
+    margin-top: 40px;
+}
+.book-list{
+    width: 100%;
+}
+.swiper-container{
+    height: 410px !important;
+    width: 100%;
+}
+.swiper-slide{
+    width: 250px !important;
+}
+.carousel-content{
+    padding: 10px 65px 10px 0;
+}
+.carousel-content img{
+    width: 165px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+.carousel-content p{
+    height: 50px;
+    overflow: hidden;
+    font-size: 20px;
+}
+.carousel-content button{
+    width: 130px;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    background: #14281D;
+    color: #F2F5E0;
+    border-radius: 30px;
+    font-size: 20px;
+}
+.content{
+    height: 97%;
+    overflow-y: auto;
+    background: #F2F5E0;
+    padding: 63px 55px;
+    border-radius: 80px;
+}
+.content::-webkit-scrollbar, .description::-webkit-scrollbar {
+    width: 1em;
+}
+.content::-webkit-scrollbar-thumb, .description::-webkit-scrollbar-thumb {
+    background-color: #14281D;
+    border-radius: 10px;
+}
+.mainImg{
+    width: 370px;
+    position: absolute;
+    bottom: 0px;
+    left: -30px;
+}
+header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.MuiPaper-elevation4 {
+    background: none;
+    box-shadow: none;
+    color: #14281D;
+}
+.PrivateTabIndicator-colorSecondary-3 {
+    background-color: #14281D !important;
+}
+.MuiTabs-flexContainer {
+    display: flex;
+    justify-content: space-around;
+}
+.mt-8 {
+    width: 530px;
+    margin: auto;
+    text-align: center;
+    height: auto;
+    padding: 50px 60px;
+    background: #14281D;
+    border-radius: 70px;
+}
+.mt-8 input{
+    width: 390px;
+    height: 60px;
+    margin-bottom: 20px;
+    background: #F2F5E0;
+    border-radius: 50px;
+    border: none;
+    padding: 20px;
+    font-size: 20px;
+}
+.mt-8 button{
+    width: 176px;
+    height: 48px;
+    border: none;
+    background: #F2F5E0;
+    border-radius: 50px;
+    font-size: 20px;
+}
+.mt-8 .google{
+    width: 48px;
+    height: 48px;
+    margin-top: 20px;
+    font-size: 30px;
+    margin-right: 15px;
+}
+.mt-8 img{
+    width:250px;
+    margin-top: -30px;
+}
+.mt-8 a{
+    color: #F2F5E0; 
+}
+.search button{
+    background: #9CB380;
+    border: none;
+    color: #F2F5E0;
+    font-size: 34px;
+    width: 60px;
+    height: 60px;
+    border-radius: 0 50% 50% 0;
+    position: absolute;
+    top: 0;
+    padding-top: 5px;
+}
+.search{
+    position: relative;
+}
+.search Input{
+    width: 620px;
+    height: 60px;
+    background: #9CB380;
+    border-radius: 30px 0 0 30px;
+    border: none;
+    padding: 20px;
+    font-size: 20px;
+    color: #F2F5E0;
+}
+.search input::placeholder {
+    color: #F2F5E0;
+    opacity: .5;
+  }
+.singleBook{
+    width: 90%;
+    margin: auto;
+}
+.singleBook img{
+    width: 200px;
+    height: 300px;
+    border-radius: 50px;
+    float: left;
+}
+.desc{
+    height: 300px;
+    position: relative;
+}
+.desc p{
+    margin: 10px 0;
+}
+.desc .text{
+    position: absolute;
+    bottom: 0;
+    left: 220px
+}
+.description{
+    height: 90px;
+    overflow: auto;
+    font-size: 18px;
+}
+.details {
+    height: 270px;
+    width: 380px;
+    float: left;
+    margin-top: 50px;
+    background: #14281D;
+    border-radius: 40px;
+    color: #F2F5E0;
+    font-size: 25px;
+    line-height: 46px;
+    padding: 30px;
+    margin-right: 50px;
+}
+.desc button, .mx-auto .signOut{
+    padding: 10px;
+    height: 55px;
+    margin-top: 10px;
+    border: none;
+    background: #14281D;
+    color: #F2F5E0;
+    border-radius: 30px;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.reviews{
+    margin-top: 50px;
+    margin-left: 10px;
+}
+.reviews textarea{
+    width: 500px;
+    height: 70px;
+    background: #14281D;
+    border-radius: 30px;
+    border: none;
+    padding: 20px;
+    font-size: 20px;
+    color: #F2F5E0; 
+    float: none;
+}
+.reviews button{
+    padding: 10px;
+    height: 70px;
+    border: none;
+    background: #14281D;
+    color: #F2F5E0;
+    border-radius: 30px;
+    font-size: 30px;
+    position: absolute;
+    margin-left: 10px;
+}
+.reviews .post{
+    margin: 10px 0;
+    
+}
+.mx-auto .carousel-content{
+    float: left;
+    width: 25%;
+}
+.pnf img{
+    width: 40%;
+    float: right;
+    margin-right: 100px;
+}
+.pnf p{
+    margin-top: 50%;
+}

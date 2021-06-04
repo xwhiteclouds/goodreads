@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import img from '../imgs/pass.png'
 
 const PasswordReset = () => {
   const [email, setEmail] = useState("");
@@ -34,10 +35,8 @@ const PasswordReset = () => {
       });
   };
   return (
-    <div className="mt-8">
-      <h1 className="text-xl text-center font-bold mb-3">
-        Reset your Password
-      </h1>
+    <div className="mt-8" style={{height: 'auto'}}>
+      <img src={img} style={{marginBottom: '20px'}}/>
       <div className="border border-blue-300 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
         <form action="">
           {emailHasBeenSent && (
@@ -50,9 +49,6 @@ const PasswordReset = () => {
               {error}
             </div>
           )}
-          <label htmlFor="userEmail" className="w-full block">
-            Email:
-          </label>
           <input
             type="email"
             name="userEmail"
@@ -60,13 +56,13 @@ const PasswordReset = () => {
             value={email}
             placeholder="Input your email"
             onChange={onChangeHandler}
-            className="mb-3 w-full px-1 py-2"
           />
           <button
             className="w-full bg-blue-400 text-white py-3"
             onClick={event => {
               sendResetEmail(event);
             }}
+            style={{width: 'auto', padding: '10px'}}
           >
             Send me a reset link
           </button>
