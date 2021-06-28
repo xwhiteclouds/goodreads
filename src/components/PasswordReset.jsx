@@ -49,6 +49,7 @@ const PasswordReset = () => {
               {error}
             </div>
           )}
+          {/* <img src={img}/> */}
           <input
             type="email"
             name="userEmail"
